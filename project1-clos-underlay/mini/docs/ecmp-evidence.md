@@ -5,39 +5,27 @@
 #TEST 1
 
 === BEFORE ===
-robot@clab:~/netlab/project1-clos-underlay/mini$ echo -n "spine1 eth2 TX: "; docker exec clab-p1-mini-spine1 cat /sys/class/net/eth2/statistics/tx_bytes
 spine1 eth2 TX: 906997
-robot@clab:~/netlab/project1-clos-underlay/mini$ echo -n "spine2 eth2 TX: "; docker exec clab-p1-mini-spine2 cat /sys/class/net/eth2/statistics/tx_bytes
 spine2 eth2 TX: 24074468913
-robot@clab:~/netlab/project1-clos-underlay/mini$ docker exec clab-p1-mini-h1 iperf3 -c 192.168.12.10 -t 15 -P 8
 Connecting to host 192.168.12.10, port 5201
 
 === AFTER ===
-robot@clab:~/netlab/project1-clos-underlay/mini$ echo -n "spine1 eth2 TX: "; docker exec clab-p1-mini-spine1 cat /sys/class/net/eth2/statistics/tx_bytes
 spine1 eth2 TX: 909479
-robot@clab:~/netlab/project1-clos-underlay/mini$ echo -n "spine2 eth2 TX: "; docker exec clab-p1-mini-spine2 cat /sys/class/net/eth2/statistics/tx_bytes
 spine2 eth2 TX: 58895226774
 
 #TEST 2
 
 === BEFORE ===
-robot@clab:~/netlab/project1-clos-underlay/mini$ echo -n "spine1: "; docker exec clab-p1-mini-spine1 cat /sys/class/net/eth2/statistics/tx_bytes
 spine1: 926169
-robot@clab:~/netlab/project1-clos-underlay/mini$ echo -n "spine2: "; docker exec clab-p1-mini-spine2 cat /sys/class/net/eth2/statistics/tx_bytes
 spine2: 87321594004
-robot@clab:~/netlab/project1-clos-underlay/mini$ docker exec clab-p1-mini-h1 sh -c "iperf3 -c 192.168.12.10 -p 5201 -t 12 & iperf3 -c 192.168.12.11 -p 5202 -t 12 & iperf3 -c 192>
 Connecting to host 192.168.12.11, port 5202
 Connecting to host 192.168.12.10, port 5201
 Connecting to host 192.168.12.13, port 5204
 Connecting to host 192.168.12.12, port 5203
 
 === AFTER ===
-robot@clab:~/netlab/project1-clos-underlay/mini$ echo -n "spine1: "; docker exec clab-p1-mini-spine1 cat /sys/class/net/eth2/statistics/tx_bytes
 spine1: 52533797334
-robot@clab:~/netlab/project1-clos-underlay/mini$ echo -n "spine2: "; docker exec clab-p1-mini-spine2 cat /sys/class/net/eth2/statistics/tx_bytes
 spine2: 139711753265
-
-# RESULTS
 
 # RESULTS
 
