@@ -1,10 +1,10 @@
 
-#Convergence/Resilience Test
+# Convergence/Resilience Test
 
 leaf1 has two ECMP paths to h2 (via spine1 and spine2). We start a continuous ping from h1 to h2, the cut the link from leaf1 to spine1 mid stream, 
 observe the routing table, and then restore the link.
 
-#Results
+## Results
 === 1. BEFORE: route to h2 (expect TWO next-hops) ===
 Routing entry for 192.168.12.0/24
   Known via "bgp", distance 20, metric 0, best
@@ -38,7 +38,7 @@ Routing entry for 192.168.12.0/24
 
 Traffic: 40 packets transmitted, 40 received, 0% packet loss, time 8107ms
 
-#Conclusion
+## Conclusion
 Cutting the spine1 link immediately marked its next hop inactive in leaf1s route table
 While the spine2 next hop stayed active. This proves leaf1 detects the failure and updates forwarding (two paths to one). 
 Because ECMP pre installs both paths, this failure only requires deactivating the dead next hop, not computing a new route.

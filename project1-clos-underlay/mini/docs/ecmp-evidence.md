@@ -1,8 +1,8 @@
 
-#ECMP LOGS
+# ECMP LOGS
 
 
-#TEST 1
+## TEST 1
 
 === BEFORE ===
 spine1 eth2 TX: 906997
@@ -13,8 +13,8 @@ Connecting to host 192.168.12.10, port 5201
 spine1 eth2 TX: 909479
 spine2 eth2 TX: 58895226774
 
-#TEST 2
-
+## TEST 2
+ 
 === BEFORE ===
 spine1: 926169
 spine2: 87321594004
@@ -27,7 +27,7 @@ Connecting to host 192.168.12.12, port 5203
 spine1: 52533797334
 spine2: 139711753265
 
-# RESULTS
+## RESULTS
 
 Entropy is set by how the flows differ, visible in the "Connecting to" lines:
 - Test 1 (low entropy): all 8 flows → same dst 192.168.12.10:5201, only src port varied.
