@@ -1,0 +1,42 @@
+name: sonic-test
+topology:
+  nodes:
+    s1:
+      kind: sonic-vs
+      image: docker-sonic-vs:latest
+    h1:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool
+  links:
+    - endpoints: ["s1:eth1", "h1:eth1"]
+    - endpoints: ["s1:eth2", "h1:eth2"]
+    - endpoints: ["s1:eth3", "h1:eth3"]
+    - endpoints: ["s1:eth4", "h1:eth4"]
+    - endpoints: ["s1:eth5", "h1:eth5"]
+    - endpoints: ["s1:eth6", "h1:eth6"]
+    - endpoints: ["s1:eth7", "h1:eth7"]
+    - endpoints: ["s1:eth8", "h1:eth8"]
+    - endpoints: ["s1:eth9", "h1:eth9"]
+    - endpoints: ["s1:eth10", "h1:eth10"]
+    - endpoints: ["s1:eth11", "h1:eth11"]
+    - endpoints: ["s1:eth12", "h1:eth12"]
+    - endpoints: ["s1:eth13", "h1:eth13"]
+    - endpoints: ["s1:eth14", "h1:eth14"]
+    - endpoints: ["s1:eth15", "h1:eth15"]
+    - endpoints: ["s1:eth16", "h1:eth16"]
+    - endpoints: ["s1:eth17", "h1:eth17"]
+    - endpoints: ["s1:eth18", "h1:eth18"]
+    - endpoints: ["s1:eth19", "h1:eth19"]
+    - endpoints: ["s1:eth20", "h1:eth20"]
+    - endpoints: ["s1:eth21", "h1:eth21"]
+    - endpoints: ["s1:eth22", "h1:eth22"]
+    - endpoints: ["s1:eth23", "h1:eth23"]
+    - endpoints: ["s1:eth24", "h1:eth24"]
+    - endpoints: ["s1:eth25", "h1:eth25"]
+    - endpoints: ["s1:eth26", "h1:eth26"]
+    - endpoints: ["s1:eth27", "h1:eth27"]
+    - endpoints: ["s1:eth28", "h1:eth28"]
+    - endpoints: ["s1:eth29", "h1:eth29"]
+    - endpoints: ["s1:eth30", "h1:eth30"]
+    - endpoints: ["s1:eth31", "h1:eth31"]
+    - endpoints: ["s1:eth32", "h1:eth32"]
