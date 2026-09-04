@@ -1,0 +1,118 @@
+name: p3-sonic
+
+topology:
+  nodes:
+    spine1:
+      kind: linux
+      image: quay.io/frrouting/frr:10.2.1
+      binds:
+        - configs/spine1/daemons:/etc/frr/daemons
+        - configs/spine1/frr.conf:/etc/frr/frr.conf
+    spine2:
+      kind: linux
+      image: quay.io/frrouting/frr:10.2.1
+      binds:
+        - configs/spine2/daemons:/etc/frr/daemons
+        - configs/spine2/frr.conf:/etc/frr/frr.conf
+    leaf1:
+      kind: sonic-vs
+      image: docker-sonic-vs:latest
+    leaf2:
+      kind: sonic-vs
+      image: docker-sonic-vs:latest
+    h1:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool
+      exec:
+        - ip link set eth1 up
+        - ip addr add 192.168.100.10/24 dev eth1
+        - ip route replace default via 192.168.100.1
+    h2:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool
+      exec:
+        - ip link set eth1 up
+        - ip addr add 192.168.101.10/24 dev eth1
+        - ip route replace default via 192.168.101.1
+    h3:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool
+      exec:
+        - ip link set eth1 up
+        - ip addr add 192.168.200.10/24 dev eth1
+        - ip route replace default via 192.168.200.1
+    h4:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool
+      exec:
+        - ip link set eth1 up
+        - ip addr add 192.168.201.10/24 dev eth1
+        - ip route replace default via 192.168.201.1
+    sink:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool
+  links:
+    - endpoints: ["spine1:eth1", "leaf1:eth1"]
+    - endpoints: ["spine1:eth2", "leaf2:eth1"]
+    - endpoints: ["spine2:eth1", "leaf1:eth3"]
+    - endpoints: ["spine2:eth2", "leaf2:eth3"]
+    - endpoints: ["leaf1:eth2", "h1:eth1"]
+    - endpoints: ["leaf2:eth2", "h2:eth1"]
+    - endpoints: ["leaf1:eth4", "h3:eth1"]
+    - endpoints: ["leaf2:eth4", "h4:eth1"]
+    - endpoints: ["leaf1:eth5", "sink:eth1"]
+    - endpoints: ["leaf1:eth6", "sink:eth2"]
+    - endpoints: ["leaf1:eth7", "sink:eth3"]
+    - endpoints: ["leaf1:eth8", "sink:eth4"]
+    - endpoints: ["leaf1:eth9", "sink:eth5"]
+    - endpoints: ["leaf1:eth10", "sink:eth6"]
+    - endpoints: ["leaf1:eth11", "sink:eth7"]
+    - endpoints: ["leaf1:eth12", "sink:eth8"]
+    - endpoints: ["leaf1:eth13", "sink:eth9"]
+    - endpoints: ["leaf1:eth14", "sink:eth10"]
+    - endpoints: ["leaf1:eth15", "sink:eth11"]
+    - endpoints: ["leaf1:eth16", "sink:eth12"]
+    - endpoints: ["leaf1:eth17", "sink:eth13"]
+    - endpoints: ["leaf1:eth18", "sink:eth14"]
+    - endpoints: ["leaf1:eth19", "sink:eth15"]
+    - endpoints: ["leaf1:eth20", "sink:eth16"]
+    - endpoints: ["leaf1:eth21", "sink:eth17"]
+    - endpoints: ["leaf1:eth22", "sink:eth18"]
+    - endpoints: ["leaf1:eth23", "sink:eth19"]
+    - endpoints: ["leaf1:eth24", "sink:eth20"]
+    - endpoints: ["leaf1:eth25", "sink:eth21"]
+    - endpoints: ["leaf1:eth26", "sink:eth22"]
+    - endpoints: ["leaf1:eth27", "sink:eth23"]
+    - endpoints: ["leaf1:eth28", "sink:eth24"]
+    - endpoints: ["leaf1:eth29", "sink:eth25"]
+    - endpoints: ["leaf1:eth30", "sink:eth26"]
+    - endpoints: ["leaf1:eth31", "sink:eth27"]
+    - endpoints: ["leaf1:eth32", "sink:eth28"]
+    - endpoints: ["leaf2:eth5", "sink:eth29"]
+    - endpoints: ["leaf2:eth6", "sink:eth30"]
+    - endpoints: ["leaf2:eth7", "sink:eth31"]
+    - endpoints: ["leaf2:eth8", "sink:eth32"]
+    - endpoints: ["leaf2:eth9", "sink:eth33"]
+    - endpoints: ["leaf2:eth10", "sink:eth34"]
+    - endpoints: ["leaf2:eth11", "sink:eth35"]
+    - endpoints: ["leaf2:eth12", "sink:eth36"]
+    - endpoints: ["leaf2:eth13", "sink:eth37"]
+    - endpoints: ["leaf2:eth14", "sink:eth38"]
+    - endpoints: ["leaf2:eth15", "sink:eth39"]
+    - endpoints: ["leaf2:eth16", "sink:eth40"]
+    - endpoints: ["leaf2:eth17", "sink:eth41"]
+    - endpoints: ["leaf2:eth18", "sink:eth42"]
+    - endpoints: ["leaf2:eth19", "sink:eth43"]
+    - endpoints: ["leaf2:eth20", "sink:eth44"]
+    - endpoints: ["leaf2:eth21", "sink:eth45"]
+    - endpoints: ["leaf2:eth22", "sink:eth46"]
+    - endpoints: ["leaf2:eth23", "sink:eth47"]
+    - endpoints: ["leaf2:eth24", "sink:eth48"]
+    - endpoints: ["leaf2:eth25", "sink:eth49"]
+    - endpoints: ["leaf2:eth26", "sink:eth50"]
+    - endpoints: ["leaf2:eth27", "sink:eth51"]
+    - endpoints: ["leaf2:eth28", "sink:eth52"]
+    - endpoints: ["leaf2:eth29", "sink:eth53"]
+    - endpoints: ["leaf2:eth30", "sink:eth54"]
+    - endpoints: ["leaf2:eth31", "sink:eth55"]
+    - endpoints: ["leaf2:eth32", "sink:eth56"]

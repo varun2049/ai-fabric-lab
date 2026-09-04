@@ -1,0 +1,7 @@
+{
+  "VLAN": { "Vlan100": { "vlanid": "100" } },
+  "VXLAN_TUNNEL": { "vtep1": { "src_ip": "10.255.0.12" } },
+  "VXLAN_TUNNEL_MAP": { "vtep1|map_100_Vlan100": { "vlan": "Vlan100", "vni": "100" } },
+  "VXLAN_EVPN_NVO": { "nvo1": { "source_vtep": "vtep1" } },
+  "SUPPRESS_VLAN_NEIGH": { "Vlan100": { "suppress": "on" } }
+}

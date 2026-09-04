@@ -1,0 +1,14 @@
+{
+  "DEVICE_METADATA": { "localhost": { "hostname": "leaf1", "bgp_asn": "65011" } },
+  "PORT": {
+    "Ethernet0":  { "admin_status": "up" },
+    "Ethernet4":  { "admin_status": "up" },
+    "Ethernet8":  { "admin_status": "up" },
+    "Ethernet12": { "admin_status": "up" }
+  },
+  "LOOPBACK_INTERFACE": { "Loopback0": {}, "Loopback0|10.255.0.11/32": {} },
+  "INTERFACE": {
+    "Ethernet0": {}, "Ethernet0|10.0.1.1/31": {},
+    "Ethernet8": {}, "Ethernet8|10.0.11.1/31": {}
+  }
+}
