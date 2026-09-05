@@ -1,0 +1,124 @@
+{
+  "DEVICE_METADATA": {
+    "localhost": {
+      "hostname": "leaf2",
+      "bgp_asn": "65012"
+    }
+  },
+  "PORT": {
+    "Ethernet0": {
+      "admin_status": "up"
+    },
+    "Ethernet4": {
+      "admin_status": "up"
+    },
+    "Ethernet8": {
+      "admin_status": "up"
+    },
+    "Ethernet12": {
+      "admin_status": "up"
+    }
+  },
+  "LOOPBACK_INTERFACE": {
+    "Loopback0": {},
+    "Loopback0|10.255.0.12/32": {}
+  },
+  "INTERFACE": {
+    "Ethernet0": {},
+    "Ethernet0|10.0.2.1/31": {},
+    "Ethernet8": {},
+    "Ethernet8|10.0.12.1/31": {}
+  },
+  "VLAN": {
+    "Vlan100": {
+      "vlanid": "100"
+    },
+    "Vlan101": {
+      "vlanid": "101"
+    },
+    "Vlan201": {
+      "vlanid": "201"
+    },
+    "Vlan1000": {
+      "vlanid": "1000"
+    },
+    "Vlan2000": {
+      "vlanid": "2000"
+    }
+  },
+  "VXLAN_TUNNEL": {
+    "vtep1": {
+      "src_ip": "10.255.0.12"
+    }
+  },
+  "VXLAN_TUNNEL_MAP": {
+    "vtep1|map_100_Vlan100": {
+      "vlan": "Vlan100",
+      "vni": "100"
+    },
+    "vtep1|map_101_Vlan101": {
+      "vlan": "Vlan101",
+      "vni": "101"
+    },
+    "vtep1|map_201_Vlan201": {
+      "vlan": "Vlan201",
+      "vni": "201"
+    },
+    "vtep1|map_1000_Vlan1000": {
+      "vlan": "Vlan1000",
+      "vni": "1000"
+    },
+    "vtep1|map_2000_Vlan2000": {
+      "vlan": "Vlan2000",
+      "vni": "2000"
+    }
+  },
+  "VXLAN_EVPN_NVO": {
+    "nvo1": {
+      "source_vtep": "vtep1"
+    }
+  },
+  "SUPPRESS_VLAN_NEIGH": {
+    "Vlan100": {
+      "suppress": "on"
+    },
+    "Vlan101": {
+      "suppress": "on"
+    },
+    "Vlan201": {
+      "suppress": "on"
+    }
+  },
+  "VRF": {
+    "VrfA": {
+      "vni": "1000"
+    },
+    "VrfB": {
+      "vni": "2000"
+    }
+  },
+  "VLAN_MEMBER": {
+    "Vlan101|Ethernet4": {
+      "tagging_mode": "untagged"
+    },
+    "Vlan201|Ethernet12": {
+      "tagging_mode": "untagged"
+    }
+  },
+  "VLAN_INTERFACE": {
+    "Vlan101": {
+      "vrf_name": "VrfA"
+    },
+    "Vlan101|192.168.101.1/24": {},
+    "Vlan201": {
+      "vrf_name": "VrfB"
+    },
+    "Vlan201|192.168.201.1/24": {},
+    "Vlan1000": {
+      "vrf_name": "VrfA"
+    },
+    "Vlan2000": {
+      "vrf_name": "VrfB"
+    }
+  }
+}

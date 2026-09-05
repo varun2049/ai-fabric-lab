@@ -1,9 +1,0 @@
-{
-  "VLAN": { "Vlan100": { "vlanid": "100" } },
-  "VLAN_MEMBER": { "Vlan100|Ethernet4": { "tagging_mode": "untagged" } },
-  "VLAN_INTERFACE": { "Vlan100": {}, "Vlan100|192.168.100.1/24": {} },
-  "VXLAN_TUNNEL": { "vtep1": { "src_ip": "10.255.0.11" } },
-  "VXLAN_TUNNEL_MAP": { "vtep1|map_100_Vlan100": { "vlan": "Vlan100", "vni": "100" } },
-  "VXLAN_EVPN_NVO": { "nvo1": { "source_vtep": "vtep1" } },
-  "SUPPRESS_VLAN_NEIGH": { "Vlan100": { "suppress": "on" } }
-}
