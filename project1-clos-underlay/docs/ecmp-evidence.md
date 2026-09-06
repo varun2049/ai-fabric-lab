@@ -1,8 +1,12 @@
+# ECMP Evidence - Flow Entropy and Path Spread
 
-# ECMP LOGS
+## What this shows
+Whether traffic from h1 to h2 spreads across both spines depends on flow entropy, not
+on the number of flows. Spine link byte counters are read before and after each test;
+the delta shows how much each spine carried.
 
 
-## TEST 1
+## Test 1 - low entropy (one destination, one port)
 
 ```
 === BEFORE ===
@@ -15,7 +19,7 @@ spine1 eth2 TX: 909479
 spine2 eth2 TX: 58895226774
 ```
 
-## TEST 2
+## Test 2 - high entropy (four destinations, four ports)
  
 ```
 === BEFORE ===
@@ -31,7 +35,7 @@ spine1: 52533797334
 spine2: 139711753265
 ```
 
-## RESULTS
+## Result
 
 Entropy is set by how the flows differ, visible in the "Connecting to" lines:
 - Test 1 (low entropy): all 8 flows → same dst 192.168.12.10:5201, only src port varied.
@@ -44,6 +48,12 @@ Deltas (AFTER − BEFORE):
 ECMP hashes on the 5 tuple, so spread depends on flow entropy.
 Low entropy (few varying fields) collides flows onto one path; high entropy
 spreads them.
+
+
+## Transcript
+Verbatim session for both tests. The first multi-stream attempt targets a single iperf3
+server, which serialises tests, so three of four streams are refused; the test is then
+repeated with one server per port.
 
 ```
 robot@clab:~/netlab/project1-clos-underlay/mini$ docker exec clab-p1-mini-h2 pkill iperf3 2>/dev/null; sleep 1

@@ -96,7 +96,7 @@ identically on SONiC and on FRR/Linux.
 3 The routed path is visible at every layer: FRR, APPL_DB (with VNI and router MAC),
 ASIC_DB (in the tenant's virtual router).
 
-## Scope
+## Limitations
 Anycast gateway (identical IP and MAC on every leaf) is not configured: the community
 image's static-anycast-gateway support was not confirmed for this build, and the design
 does not require it. Virtual-platform quirks are listed in

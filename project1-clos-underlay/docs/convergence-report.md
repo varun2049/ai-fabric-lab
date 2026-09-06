@@ -53,7 +53,7 @@ SessionId  LocalAddress    PeerAddress    Status
 3177160032 10.0.11.1       10.0.11.0      up
 ```
 
-## Scope
+## Limitations
 Proven: BFD cuts the time BGP takes to notice an unresponsive peer by 88% under
 identical conditions. Not proven: end-to-end data-plane outage - detection is one
 component of convergence, and propagation and FIB update follow it.

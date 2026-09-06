@@ -3,11 +3,11 @@
 ## What this shows
 The Raw VXLAN (no control plane) tunnels a Layer-2 frame across the L3 underlay.
 h1 (192.168.100.10) and h2 (192.168.100.20) are on the same subnet but different
-leaves. So their traffic is bridged across the fabrin inside VXLAN tunnels.
+leaves. So their traffic is bridged across the fabric inside VXLAN tunnels.
 
 ## The packet
 Each captured packet is two nested packets:
--Outer: 10.255.0.11 > 10.2555.0.12 on UDP dport 4789 = this is the leaf1 loopback to leaf2
+-Outer: 10.255.0.11 > 10.255.0.12 on UDP dport 4789 = this is the leaf1 loopback to leaf2
  loopback (VTEPs). The underlay only sees this and spines route leaf to leaf.
 -VXLAN header: vni 100 = the virtual network ID.
 -Inner: 192.168.100.10 > 192.168.100.20 ICMP = this is the real h1 to h2 ping, wrapped inside.

@@ -1,4 +1,4 @@
-# Flood & Learn: Why Raw VXLAN doesn't scale  Project 2 Part A
+# Flood and Learn - Why Raw VXLAN Does Not Scale - Project 2 Part A
 
 ## Evidence: the overlay depends on one manual entry
 Raw VXLAN has no control plane. leaf 1 reaches leaf 2 because of a hand
@@ -75,4 +75,4 @@ discovery, not as a measurement of it.
 
 ## What EVPN fixes (Part B)
 VTEPs advertise MAC/IP bindings over MP-BGP, leaves are told where hosts live,
-remot VTEPs are discovered automatically (no static FDB), and ARP is supressed locally.
+remote VTEPs are discovered automatically (no static FDB), and ARP is suppressed locally.

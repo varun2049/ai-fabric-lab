@@ -1,4 +1,4 @@
-# Three Way Correlation Project 2 Part B
+# Three-Way Correlation - Project 2 Part B
 
 ## What this shows
 One MAC address (`aa:c1:ab:62:49:f7` = h1, attached to leaf1) traced through three

@@ -1,8 +1,8 @@
 
-# Convergence/Resilience Test
+# Link Failure with ECMP Pre-installed Paths - Project 1
 
-leaf1 has two ECMP paths to h2 (via spine1 and spine2). We start a continuous ping from h1 to h2, the cut the link from leaf1 to spine1 mid stream, 
-observe the routing table, and then restore the link.
+leaf1 has two ECMP paths to h2 (via spine1 and spine2). A continuous ping runs from h1 to h2; the leaf1-spine1 link is cut mid-stream, the routing
+table observed, and the link restored.
 
 ## Results
 ```
@@ -40,10 +40,12 @@ Routing entry for 192.168.12.0/24
 Traffic: 40 packets transmitted, 40 received, 0% packet loss, time 8107ms
 ```
 ## Conclusion
-Cutting the spine1 link immediately marked its next hop inactive in leaf1s route table
+Cutting the spine1 link immediately marked its next hop inactive in leaf1's route table
 While the spine2 next hop stayed active. This proves leaf1 detects the failure and updates forwarding (two paths to one). 
-Because ECMP pre installs both paths, this failure only requires deactivating the dead next hop, not computing a new route.
+Because ECMP pre-installs both paths, this failure only requires deactivating the dead next hop, not computing a new route.
 
+
+## Commands used
 ```
 echo "=== 1. BEFORE: route to h2 (expect TWO next-hops) ==="
 docker exec clab-p1-mini-leaf1 vtysh -c "show ip route 192.168.12.0/24"

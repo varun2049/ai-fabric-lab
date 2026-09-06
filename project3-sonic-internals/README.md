@@ -79,7 +79,7 @@ defers VLAN programming until all ports have initialized. Configuration is appli
 with `config load` (a merge) once ports are ready. This image has no `bgpcfgd`, so FRR
 is configured directly from `bgpd.conf` and the L3VNI bindings are applied via `vtysh`.
 
-## Scope
+## Limitations
 
 Virtual-platform behaviour, not pipeline defects: `show mac` omits the tunnel entries
 ASIC_DB holds; the EVPN tunnel reports `operstatus down` in STATE_DB while forwarding

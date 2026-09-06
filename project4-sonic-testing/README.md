@@ -37,7 +37,7 @@ project4-sonic-testing/
 See the Reproduce section of the notes. Requires Docker, the Project 3 lab for PTF and
 SPyTest, `sonic-swss` (branch 202411) and `sonic-mgmt` (spytest) checked out under `~/src`.
 
-## Scope
+## Limitations
 Everything runs on the virtual switch, so data-plane assertions cover forwarding
 decisions, not line-rate behaviour. LAG-related DVS tests need the `team` kernel
 module, absent on this host. The three frameworks are exercised at the depth of one

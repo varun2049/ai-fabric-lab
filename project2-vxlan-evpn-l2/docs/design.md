@@ -84,7 +84,7 @@ configuration change at all.
 no IP-to-MAC bindings, so its Type-2 routes are MAC-only and ARP suppression has nothing
 to answer from. See `arp-suppression.md` for the measured before and after. The SVIs use
 a different IP per leaf, not a shared anycast address - anycast gateways belong to the
-IRB model in a later project.
+IRB model in [Project 2.5](../../project2_5-frr-irb-type5/).
 
 **Runtime state in setup scripts.** containerlab does not persist kernel interfaces, so
 bridges, VXLAN devices, suppression flags and SVIs are rebuilt by `setup-static.sh` and
@@ -117,27 +117,48 @@ plane rather than learned from traffic.
 Packet captures in `pcaps/`: VXLAN encapsulation, EVPN Type-3 refresh, Type-2 origination,
 ARP before and after suppression.
 
-## Concept answers
+## Key concepts
 
-<< Write these in your own words - they are the interview rehearsal. >>
+**What VXLAN solves, and what EVPN adds.** VXLAN extends a Layer 2 segment across a
+routed Layer 3 fabric by carrying Ethernet frames inside UDP, each segment identified by
+a 24-bit VNI (16 million segments against 4094 VLANs). On its own it has no control
+plane: remote VTEPs are configured by hand and MAC locations are learned by flooding.
+EVPN adds a BGP control plane that distributes VTEP membership (Type-3) and MAC/IP
+reachability (Type-2), so leaves know where hosts are before traffic flows and flood only
+what they must.
 
-**What problem does VXLAN solve, and what does EVPN add on top of it?**
+**How BGP carries MAC addresses.** Through MP-BGP: the L2VPN address family (AFI 25)
+with the EVPN SAFI (70). Reachability travels as NLRI inside the MP_REACH_NLRI path
+attribute rather than as IPv4 prefixes. The capture in `three-way-correlation.md` decodes
+one such NLRI from hex: route type, RD, MAC and VNI.
 
-**How does BGP carry MAC addresses?** (MP-BGP, AFI 25 / SAFI 70, MP_REACH_NLRI - you have
-this hand-decoded from a real capture in `three-way-correlation.md`.)
+**Type-2 and Type-3 routes.** A Type-3 (Inclusive Multicast Ethernet Tag) route announces
+that a VTEP participates in a VNI and how to reach it for broadcast, unknown-unicast and
+multicast; it replaces Part A's hand-typed remote-VTEP FDB entry. A Type-2 (MAC/IP
+Advertisement) route announces a specific MAC, optionally with its IP, behind a VTEP; it
+replaces flood-and-learn.
 
-**What do Type-2 and Type-3 routes each do?** (Point at what each one replaced from
-Part A.)
+**RD and RT.** A Route Distinguisher is prepended to the NLRI so that routes from
+different tenants remain distinct in the BGP table even when they carry the same MAC or
+prefix; it disambiguates and does not filter. A Route Target is an extended community on
+the route, and a VTEP imports only routes whose RT is on a VNI's import list. RT enforces
+isolation; RD only keeps overlapping entries apart.
 
-**What are RD and RT, and which one enforces isolation?**
+**Why VXLAN breaks MTU.** Relative to the underlay's IP MTU, encapsulation adds 50 bytes:
+outer IP 20, UDP 8, VXLAN 8, and the inner Ethernet header 14. On a 1500-byte underlay
+the largest inner IP packet is 1450 bytes; larger packets are dropped while small ones
+pass - the gray failure in `mtu-postmortem.md`. The fix is an underlay MTU large enough
+for the overlay's 1500 plus overhead (9000 in practice).
 
-**Why does VXLAN break MTU, and how is it fixed?**
+**How overlay and underlay relate.** The overlay is tunnelled traffic between VTEP
+loopbacks; the underlay is the eBGP fabric that routes those loopbacks. Every EVPN route's
+next-hop is a VTEP loopback, so EVPN reachability inherits the underlay's ECMP: each
+remote VTEP resolves over both spines.
 
-**How do the overlay and underlay relate?** (Include the ECMP-on-EVPN-routes observation -
-it is your own finding, not something the primer told you.)
-
-**Given a MAC in this fabric, how would you locate it?** (The three-way correlation, in
-under two minutes.)
+**Locating a MAC in the fabric.** `show bgp l2vpn evpn route type macip` for the Type-2
+(which VTEP, RD, RT); `bridge fdb show` on the leaf for the kernel entry (`extern_learn`,
+destination VTEP); a capture on the BGP session for the UPDATE that carried it. The
+three-way correlation, in that order.
 
 ## Limitations
 - A virtual lab demonstrates control-plane and kernel forwarding behaviour. It does not
@@ -145,7 +166,7 @@ under two minutes.)
 - Two leaves and four hosts. Flooding costs and isolation are demonstrated as mechanisms,
   not at a scale where their scaling behaviour is visible.
 - L2 overlay only. Inter-subnet routing in the overlay (IRB, L3VNI, Type-5 routes) is out
-  of scope and is the subject of the next project.
+  of scope and is the subject of [Project 2.5](../../project2_5-frr-irb-type5/).
 - MAC mobility (Type-2 re-advertisement with an incremented sequence number) was not
   exercised.
 

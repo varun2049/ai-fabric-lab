@@ -234,7 +234,7 @@ inferred.
 4 A configuration row's SAI object is created and removed by identifiable functions in
 orchagent; the recording shows the same object ID at both ends of its life.
 
-## Scope
+## Limitations
 Observed on the virtual platform, not defects in the pipeline: `show mac` lists only
 MACs on physical ports and omits tunnel entries that ASIC_DB holds; the EVPN tunnel
 reports `operstatus down` in STATE_DB while forwarding works, because the virtual SAI

@@ -100,7 +100,7 @@ the Type-3 routes.
 ## Configuration B - add an SVI
 An SVI (Switch Virtual Interface) is an IP address on the bridge itself, making the leaf
 a participant on the subnet rather than only a mover of frames. A different IP per leaf -
-NOT a shared anycast address, which is the IRB model and belongs to a later project.
+NOT a shared anycast address, which is the IRB model and belongs to [Project 2.5](../../project2_5-frr-irb-type5/).
 
 ```
 docker exec clab-p2-evpn-leaf1 ip addr add 192.168.100.1/24 dev br100

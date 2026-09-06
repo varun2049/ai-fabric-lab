@@ -1,4 +1,4 @@
-# MTU Postmortem: VXLAN Overhead Gray Failure — Project 2 Part A
+# MTU Postmortem - VXLAN Overhead as a Gray Failure - Project 2 Part A
 
 ## Symptom
 Small pings succeed, large frames fail. Monitoring looks healthy while real
@@ -9,7 +9,8 @@ application traffic breaks.
     From 192.168.100.20 icmp_seq=1 Frag needed and DF set (mtu = 1450)
 
 ## Cause
-VXLAN adds ~50 bytes (outer IP + UDP + VXLAN header), measured directly in the
+VXLAN adds 50 bytes relative to the underlay IP MTU (outer IP 20 + UDP 8 + VXLAN 8 +
+inner Ethernet 14), measured directly in the
 packet capture: outer length 134 vs inner length 84 = 50 bytes.
 
 With the underlay at MTU 1500, the largest inner frame that fits is 1500 - 50 =
