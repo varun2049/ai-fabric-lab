@@ -1,0 +1,26 @@
+# SPyTest testbed: one SONiC DUT (leaf1 of the Project 3 fabric) reached over SSH.
+# 'config: empty' keeps the framework from applying/reloading base configuration -
+# on a single-container docker-sonic-vs that would try to restart services via systemd.
+version: 2.0
+
+services: {default: "!include sonic_services.yaml"}
+params: "!include sonic_params.yaml"
+builds: "!include sonic_builds.yaml"
+speeds: "!include sonic_speeds.yaml"
+errors: "!include sonic_errors.yaml"
+instrument: "!include sonic_instrument.yaml"
+
+configs:
+    default: "!include sonic_configs.yaml"
+    empty: {current: [], restore: []}
+
+devices:
+    leaf1:
+        device_type: DevSonic
+        access: {protocol: ssh, ip: 172.20.20.7, port: 22}
+        rps: {model: None, ip: 0.0.0.0, outlet: 0, username: admin, password: admin}
+        credentials: {username: admin, password: YourPaSsWoRd, altpassword: YourPaSsWoRd}
+        properties: {config: empty, build: default, services: default, params: def_dut, speed: default}
+
+topology:
+    leaf1:

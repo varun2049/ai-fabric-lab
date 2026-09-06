@@ -2,3 +2,6 @@
 *.log
 **/clab-*/
 tools/snapshots/
+project4-sonic-testing/spytest/logs/
+**/.pytest_cache/
+**/__pycache__/

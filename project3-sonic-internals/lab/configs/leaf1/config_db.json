@@ -17,6 +17,15 @@
     },
     "Ethernet12": {
       "admin_status": "up"
+    },
+    "Ethernet16": {
+      "admin_status": "up"
+    },
+    "Ethernet20": {
+      "admin_status": "up"
+    },
+    "Ethernet24": {
+      "admin_status": "up"
     }
   },
   "LOOPBACK_INTERFACE": {
@@ -41,6 +50,9 @@
     },
     "Vlan2000": {
       "vlanid": "2000"
+    },
+    "Vlan110": {
+      "vlanid": "110"
     }
   },
   "VLAN_MEMBER": {
@@ -48,6 +60,15 @@
       "tagging_mode": "untagged"
     },
     "Vlan200|Ethernet12": {
+      "tagging_mode": "untagged"
+    },
+    "Vlan100|Ethernet16": {
+      "tagging_mode": "untagged"
+    },
+    "Vlan100|Ethernet20": {
+      "tagging_mode": "untagged"
+    },
+    "Vlan110|Ethernet24": {
       "tagging_mode": "untagged"
     }
   },
@@ -65,7 +86,11 @@
     },
     "Vlan2000": {
       "vrf_name": "VrfB"
-    }
+    },
+    "Vlan110": {
+      "vrf_name": "VrfA"
+    },
+    "Vlan110|192.168.110.1/24": {}
   },
   "VXLAN_TUNNEL": {
     "vtep1": {

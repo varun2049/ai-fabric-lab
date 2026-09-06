@@ -1,0 +1,34 @@
+diff --git a/spytest/templates/index b/spytest/templates/index
+index 6aa20d5..176454a 100755
+--- a/spytest/templates/index
++++ b/spytest/templates/index
+@@ -59,6 +59,8 @@ show_vlan_brief.tmpl, .*, sonic, show vlan brief
+ show_qos_map_dot1p_tc.tmpl, .*, sonic, show qos map dot1p-tc
+ show_qos_map_dscp_tc.tmpl, .*, sonic, show qos map dscp-tc
+ show_interface_counters.tmpl, .*, sonic, (sudo )?show interface counters( -i)?
++show_vlan_config.tmpl, .*, sonic, show vlan config
++# ^ moved above the 'show (v|V)lan.*' catch-all, which otherwise shadows it (local fix, 2026-09-06)
+ show_Vlan.tmpl, .*, sonic, show (v|V)lan.*
+ sudo_sonic_installer_list.tmpl, .*, sonic, (sudo sonic_installer|show image) list
+ show_system_reserved_vlan.tmpl, .*, sonic, show system vlan reserved
+@@ -84,5 +86,4 @@ show_arp.tmpl, .*, sonic, show arp
+ show_watermark_telemetry_interval.tmpl, .*,  sonic, show watermark telemetry interval
+ show_nat_statistics.tmpl, .*, sonic, show nat statistics
+ show_tacacs_server.tmpl, .*, sonic, show tacacs-server.*
+-show_vlan_config.tmpl, .*, sonic, show vlan config
+ show_ntp.tmpl, .*, sonic, show ntp.*
+diff --git a/spytest/utilities/utils.py b/spytest/utilities/utils.py
+index bf5ed7c..43193a1 100644
+--- a/spytest/utilities/utils.py
++++ b/spytest/utilities/utils.py
+@@ -1389,3 +1389,10 @@ def is_octype_gnmi():
+         return True
+     else:
+         return False
++
++
++def get_random_space_string(max_spaces=3):
++    """Local shim: referenced by apis/switching/vlan.py and pvst.py but never defined in
++    the public sonic-mgmt tree (as of 2026-09-06). Returns 0..max_spaces spaces."""
++    import random
++    return " " * random.randint(0, max_spaces)
