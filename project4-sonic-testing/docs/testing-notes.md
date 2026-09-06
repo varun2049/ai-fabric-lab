@@ -50,7 +50,8 @@ PTF binds to a set of ports, sends crafted packets, and asserts arrivals. The si
 container of the Project 3 lab terminates 28 of leaf1's ports in one namespace, so a
 PTF container attached to that namespace has a real switch on the other end:
 port 0 = Ethernet16 (Vlan100), port 1 = Ethernet20 (Vlan100), port 2 = Ethernet24
-(Vlan110, VrfA).
+(Vlan110, VrfA). `prepare-dut.sh` adds these three ports to leaf1's configuration; the
+Project 3 fabric is otherwise unchanged.
 
 `ptf/tests/test_leaf1_forwarding.py`:
 
@@ -96,7 +97,7 @@ and an index entry that shadowed the `show vlan config` template - are carried a
 cd runner && ./run-dvs.sh -v test_evpn_fdb.py && ./run-dvs.sh -v local/test_vni_map_direction.py
 
 # PTF (needs the Project 3 fabric up, with the sink-facing ports in leaf1's config)
-cd ptf && ./run-ptf.sh test_leaf1_forwarding.L2ForwardInVlan
+cd ptf && ./prepare-dut.sh && ./run-ptf.sh test_leaf1_forwarding.L2ForwardInVlan
         ./run-ptf.sh test_leaf1_forwarding.RouteBetweenVlansInVrf
 
 # SPyTest (needs ~/src/sonic-mgmt with spytest checked out)
