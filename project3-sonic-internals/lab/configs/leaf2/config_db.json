@@ -120,5 +120,10 @@
     "Vlan2000": {
       "vrf_name": "VrfB"
     }
+  },
+  "FLEX_COUNTER_TABLE": {
+    "PORT": {
+      "FLEX_COUNTER_STATUS": "enable"
+    }
   }
 }
